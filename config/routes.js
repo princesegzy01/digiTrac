@@ -22,8 +22,15 @@ module.exports.routes = {
   '/': { view: 'pages/homepage' },
   'get /rfid/index': 'RfidController.index',
 
-  // Post product from RFID
-  'post /product/add' : 'RfidController.add'
+  //scan product from RFID
+  'post /scan/add' : '',
+
+  //map tag to a product
+  'post /tag/add' : '',
+
+
+  // Get product betweent date
+  'get /report/' : '',
 
   /***************************************************************************
   *                                                                          *
