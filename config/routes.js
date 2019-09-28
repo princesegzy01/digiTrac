@@ -20,12 +20,15 @@ module.exports.routes = {
   ***************************************************************************/
 
   '/': { view: 'pages/homepage' },
+  'get /rfid/index': 'RfidController.index',
 
+  // Post product from RFID
+  'post /product/add' : 'RfidController.add'
 
   /***************************************************************************
   *                                                                          *
   * More custom routes here...                                               *
-  * (See https://sailsjs.com/config/routes for examples.)                    *
+  '/': { view: 'pages/homepage' },'/': { view: 'pages/homepage' },* (See https://sailsjs.com/config/routes for examples.)                    *
   *                                                                          *
   * If a request to a URL doesn't match any of the routes in this file, it   *
   * is matched against "shadow routes" (e.g. blueprint routes).  If it does  *
