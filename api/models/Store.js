@@ -19,8 +19,8 @@ module.exports = {
 		location: {
 			type: 'string',
 			required: true
-    },
-    state: {
+   	 	},
+    	state: {
 			type: 'string',
 			required: true
 		},
