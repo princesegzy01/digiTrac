@@ -19,18 +19,22 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  '/': { view: 'pages/homepage' },
-  'get /rfid/index': 'RfidController.index',
+  '/': { view: 'pages/index',  locals: { layout: 'layouts/account' } },
+
+  '/dashboard': { view: 'pages/dashboard' },
+
+  
+  // 'get /rfid/index': 'RfidController.index',
 
   //scan product from RFID
-  'post /scan/add' : '',
+  // 'post /scan/add' : '',
 
   //map tag to a product
-  'post /tag/add' : '',
+  // 'post /tag/add' : '',
 
 
   // Get product betweent date
-  'get /report/' : '',
+  // 'get /report/' : '',
 
   /***************************************************************************
   *                                                                          *
