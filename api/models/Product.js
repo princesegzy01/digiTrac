@@ -20,8 +20,8 @@ module.exports = {
 		serial: {
 			type: 'string',
 			required: true
-    },
-    store: {
+		},
+		store: {
 			type: 'string',
 			required: true
 		},

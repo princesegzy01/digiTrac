@@ -24,7 +24,7 @@ module.exports.routes = {
   '/dashboard': { view: 'pages/dashboard' },
 
   
-  // 'get /rfid/index': 'RfidController.index',
+  // 'get /rfid/index': 'ProductController.add',
 
   //scan product from RFID
   // 'post /scan/add' : '',
@@ -35,6 +35,11 @@ module.exports.routes = {
 
   // Get product betweent date
   // 'get /report/' : '',
+
+
+  //store
+  'post /store/add': 'StoreController.add',
+
 
   /***************************************************************************
   *                                                                          *
