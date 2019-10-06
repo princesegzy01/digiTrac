@@ -12,11 +12,15 @@ module.exports = {
 			type: 'number', 
 			autoIncrement: true
 		},
-		name: {
+		tag_name: {
 			type: 'string',
 			required: true
 		},
-		tag: {
+		tag_number: {
+			type: 'string',
+			required: true
+		},
+		drug_name: {
 			type: 'string',
 			required: true
 		},

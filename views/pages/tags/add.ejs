@@ -1,0 +1,99 @@
+<div class="" id="app">
+    <div class="row">
+        <div class="col-lg-6" style="margin-top : 50px;">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="mb-3 header-title">Tag Setup</h4>
+                    <span style="color: red" v-if="serverResponse"> {{ serverResponse }} </span>
+                    <form @submit.prevent>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Tag Name</label>
+                            <input type="text" v-model="tag.tag_name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Tag name">
+                            <small id="emailHelp" class="form-text text-muted">This can be the tag manufacturer or comapny name.</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Tag Number</label>
+                            <input type="text" v-model="tag.tag_number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Tag number">
+                            <small id="emailHelp" class="form-text text-muted">This is the unique number attached to the tag.</small>
+						</div>
+						
+						<div class="form-group">
+                            <label for="exampleInputEmail1">Drug Name</label>
+                            <input type="text" v-model="tag.drug_name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Drug Name">
+                            <small id="emailHelp" class="form-text text-muted">Name of Drug associated with the tag.</small>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary waves-effect waves-light" v-on:click="addTag">Add tag</button>
+                    </form>
+
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div>
+        <!-- end col -->
+    </div>
+    <!-- end row -->
+</div>
+<script>
+	var app = new Vue({
+		el: '#app',
+		data: {
+			message: 'Hello Vue.js!',
+			serverResponse : "",
+			tag : {
+				tag_name : "",
+				tag_number: "",
+				drug_name: ""
+			}
+		},
+		mounted () {
+		// axios
+		//   .get('https://api.coindesk.com/v1/bpi/currentprice.json')
+		//   .then(response => (this.info = response))
+		},
+		methods: {
+			reverseMessage: function () {
+				this.message = this.message.split('').reverse().join('')
+			},
+			addTag: function(){
+
+				this.serverResponse = "";
+
+				if(!this.tag.tag_name){
+					this.serverResponse = "Tag name is required to continue";
+					return;
+				}
+
+				if(!this.tag.tag_number){
+					this.serverResponse = "Tag number is required to continue";
+					return;
+				}
+
+				if(!this.tag.drug_name){
+					this.serverResponse = "Drug name is required to continue";
+					return;
+				}
+
+				axios.post('/api/tags/add', this.tag)
+				.then(function (response) {
+					console.log(response);
+					if(response.data.status != "success"){
+						this.serverResponse = response.data.status;
+						return
+					}
+
+					alert("Tag successfuly Added");
+
+					window.location.reload()
+					
+				})
+				.catch(function (error) {
+					console.log(error);
+					this.serverResponse = "Fatall error occoured";
+				});
+
+			}
+		}
+	})
+
+</script>
