@@ -4,7 +4,7 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="mb-3 header-title">Tag Setup</h4>
-                    <span style="color: red" v-if="serverResponse"> {{ serverResponse }} </span>
+                    <span class="serverResponse" v-if="serverResponse"> {{ serverResponse }} </span>
                     <form @submit.prevent>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Tag Name</label>

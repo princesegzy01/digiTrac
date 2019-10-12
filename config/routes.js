@@ -22,9 +22,9 @@ module.exports.routes = {
   //All views
 
   '/': { view: 'pages/index',  locals: { layout: 'layouts/account' } },
-  '/dashboard': { view: 'pages/dashboard' },
-  'get /tags/add': { view: 'pages/tags/add' },
-  'get /tags/': { view: 'pages/tags/index' },
+  '/app/dashboard': { view: 'pages/dashboard' },
+  'get /app/tags/add': { view: 'pages/tags/add' },
+  'get /app/tags/': { view: 'pages/tags/index' },
 
   'post /api/tags/add': 'TagController.add',
   'get /api/tags/': 'TagController.getAll',
