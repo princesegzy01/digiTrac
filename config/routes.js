@@ -25,9 +25,16 @@ module.exports.routes = {
   '/app/dashboard': { view: 'pages/dashboard' },
   'get /app/tags/add': { view: 'pages/tags/add' },
   'get /app/tags/': { view: 'pages/tags/index' },
+  'get /app/report/': { view: 'pages/report/index' },
 
   'post /api/tags/add': 'TagController.add',
   'get /api/tags/': 'TagController.getAll',
+
+  'post /api/inventory/add': 'InventoryController.add',
+  'post /api/inventory/filter': 'InventoryController.getFiltered',
+
+  'get /api/inventory': 'InventoryController.getAll',
+
 
   
   // 'get /rfid/index': 'ProductController.add',

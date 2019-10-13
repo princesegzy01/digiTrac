@@ -20,7 +20,7 @@ module.exports = {
 			type: 'string',
 			required: true
 		},
-		drug_name: {
+		product_name: {
 			type: 'string',
 			required: true
 		},
@@ -31,7 +31,7 @@ module.exports = {
 		updatedAt: { 
 			type: 'number', 
 			autoUpdatedAt: true 
-		},
+		}
 	}
 };
 

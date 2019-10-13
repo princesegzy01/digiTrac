@@ -21,6 +21,10 @@ module.exports = {
 			type: 'string',
 			required: true
 		},
+		epc : {
+			type: 'string',
+			required: true
+		},
 		store: {
 			type: 'string',
 			required: true
@@ -32,7 +36,7 @@ module.exports = {
 		updatedAt: { 
 			type: 'number', 
 			autoUpdatedAt: true 
-		},
+		}
 	}
 };
 

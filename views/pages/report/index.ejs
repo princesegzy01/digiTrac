@@ -1,0 +1,160 @@
+<div class="" id="app2">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card-box">
+                <h4 class="header-title">Inventory Report</h4>
+                <p class="sub-header">
+                    This will show the report of all Inventory
+                </p>
+
+
+                <div class="col-lg-8"></div>
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <span>Product</span> </br> 
+                            <select v-model="filter.product" class="nice-select">
+                                <option> - Select Product - </option>
+                                <option value="all"> All </option>
+                                <option v-for="product in products" :value="product.id">  {{ product.product_name}} </option>                               
+                            </select>
+                        </div>
+
+                        <div class="col-lg-2">
+                            <span>Store</span> </br> 
+                            <select  v-model="filter.store"  class="nice-select">
+                                <option> - Select Store - </option>
+                                <option value="all"> Default </option>
+                            </select>
+                        </div>
+
+                        <div class="col-lg-2">
+                            <span>Duration From</span> </br> 
+                            <vuejs-datepicker  v-model="filter.from" ></vuejs-datepicker>
+                        </div>
+
+                        <div class="col-lg-2">
+                            <span>Duration To</span> </br> 
+                            <vuejs-datepicker  v-model="filter.to" ></vuejs-datepicker>
+                        </div>
+
+                        <div class="col-lg-2">
+                            <button type="button" class="btn btn-lg btn-success waves-effect waves-light" v-on:click="filterData" >Filter</button>
+                        </div>
+                    </div>
+                </div>
+                <p></p>
+                <div class="table-responsive">
+                    <table class="table mb-0">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>#</th>
+                                <th>Product</th>
+                                <th>Serial</th>
+                                <th>EPC</th>
+                                <th>Store</th>
+                                <th>Date</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="product in inventory">
+                                <th scope="row">{{ product.id }}</th>
+                                <td>{{ getTagByTagNumber(product.tag) }}</td>
+                                <td>{{ product.serial }}</td>
+                                <td>{{ product.epc }}</td>
+                                <td> Default </td>
+                                <td>{{ product.createdAt | timeStampConverter}}</td>
+                                <td>
+                                    <button type="button" class="btn btn-primary waves-effect waves-light">View</button>
+                                    <!-- <button type="button" class="btn btn-success waves-effect waves-light">Delete</button> -->
+                                </td>
+                                <!-- <td>{{ tag.createdAt }}</td> -->
+                            </tr>
+                        
+                        </tbody>
+                    </table>
+                </div> <!-- end table-responsive-->
+
+            </div> <!-- end card-box -->
+        </div> <!-- end col -->
+    </div>
+</div>
+
+
+<script>
+    var app = new Vue({
+        el: '#app2',
+        data: {
+            inventory:[],
+            products: [],
+            store: [],
+            filter : {
+                product : "all",
+                store: "",
+                from: "",
+                to:""            }
+        },
+        components: {
+            vuejsDatepicker
+        },
+        async asyncData ({}) {
+            // let allTags  = await axios.get('/api/tags/')
+            // console.log("allTags")
+            // return { tags: allTags }
+        },
+        async mounted(){
+
+            // inventory
+            inventory  = await axios.get('/api/inventory/')
+            this.inventory = inventory.data;
+
+            //tags
+            products  = await axios.get('/api/tags/')
+            this.products = products.data;
+
+        },
+        filters: {
+            // convert timestamp to UTC format
+            timeStampConverter:  function (text) {
+                const utc = moment.utc(new Date(text));
+                return moment(utc).format("MMM-DD-YYYY hh:mm:ss A + UTC");
+            }
+        },
+        methods: {
+            reverseMessage:  function () {
+                this.message = this.message.split('').reverse().join('')
+            },
+            getTagByTagNumber(tag){
+                var res = _.find(this.products, function(o) { return o.tag_number == tag; });
+                if(!res) return tag
+                return res.product_name
+            },
+            filterData: async function(){
+                
+                if(this.filter.from !== ""){
+                    this.filter.from = moment(this.filter.from).unix() * 1000;
+                }
+
+                if(this.filter.to !== ""){
+                    this.filter.to = moment(this.filter.to).unix() * 1000;
+                }
+                
+                if(this.filter.from > this.filter.to){
+                    alert('Duration to must be greater than from')
+                    return;
+                }
+
+                axios.post('/api/inventory/filter', this.filter)
+				.then(function (response) {
+					console.log(response);
+				})
+				.catch(function (error) {
+					console.log(error);
+				});
+
+            }
+        
+        }
+    })
+
+</script>

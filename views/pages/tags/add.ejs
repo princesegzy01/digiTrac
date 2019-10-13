@@ -20,7 +20,7 @@
 						
 						<div class="form-group">
                             <label for="exampleInputEmail1">Drug Name</label>
-                            <input type="text" v-model="tag.drug_name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Drug Name">
+                            <input type="text" v-model="tag.product_name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Drug Name">
                             <small id="emailHelp" class="form-text text-muted">Name of Drug associated with the tag.</small>
                         </div>
 
@@ -43,7 +43,7 @@
 			tag : {
 				tag_name : "",
 				tag_number: "",
-				drug_name: ""
+				product_name: ""
 			}
 		},
 		mounted () {
@@ -69,7 +69,7 @@
 					return;
 				}
 
-				if(!this.tag.drug_name){
+				if(!this.tag.product_name){
 					this.serverResponse = "Drug name is required to continue";
 					return;
 				}
