@@ -2,10 +2,7 @@ module.exports = {
 
 	add : async function(req, res){
 
-
 		const data = req.body;
-
-		console.log(" >>>>>>>>> ", data)
 
 		let epc = data.epc
 		let sku = data.sku
@@ -52,11 +49,10 @@ module.exports = {
 			resObj.createdAt = { '>=' : req.body.from, '<=' : req.body.to}
 		}
 
-
 		// console.log(resObj)
-
 		result = await Inventory.find(resObj);
 		// console.log(result)
+		res.status(200).send(result)
 	},
 	getAll : async function(req, res){
 		data = await Inventory.find({})

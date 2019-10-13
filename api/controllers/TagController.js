@@ -44,7 +44,7 @@ module.exports = {
 	},
 	getAll : async function(req, res){
 		data = await Tags.find({})
-		console.log(data)
+		// console.log(data)
 		res.send(data)
 	}
 };

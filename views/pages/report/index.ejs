@@ -15,7 +15,7 @@
                             <select v-model="filter.product" class="nice-select">
                                 <option> - Select Product - </option>
                                 <option value="all"> All </option>
-                                <option v-for="product in products" :value="product.id">  {{ product.product_name}} </option>                               
+                                <option v-for="product in products" :value="product.tag_number">  {{ product.product_name}} </option>                               
                             </select>
                         </div>
 
@@ -121,7 +121,7 @@
             }
         },
         methods: {
-            reverseMessage:  function () {
+            reverseMessage:  async function () {
                 this.message = this.message.split('').reverse().join('')
             },
             getTagByTagNumber(tag){
@@ -130,7 +130,7 @@
                 return res.product_name
             },
             filterData: async function(){
-                
+               
                 if(this.filter.from !== ""){
                     this.filter.from = moment(this.filter.from).unix() * 1000;
                 }
@@ -144,14 +144,12 @@
                     return;
                 }
 
-                axios.post('/api/inventory/filter', this.filter)
-				.then(function (response) {
-					console.log(response);
-				})
-				.catch(function (error) {
-					console.log(error);
-				});
-
+                // pull inventory record
+                res = await axios.post('/api/inventory/filter', this.filter)
+                
+                //update inventory record
+                this.inventory = res.data
+                
             }
         
         }
