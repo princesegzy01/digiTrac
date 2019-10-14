@@ -150,6 +150,7 @@ module.exports = {
     cors: {
       allowOrigins: [
         'https://examp0e.com',
+        'https://digitrac.herokuapp.com/'
       ],
       allRoutes: true,
       // allowOrigins: '*',
@@ -253,7 +254,8 @@ module.exports = {
     *                                                                          *
     ***************************************************************************/
     onlyAllowOrigins: [
-      'http://localhost:1337'
+      'http://localhost:1337',
+      'https://digitrac.herokuapp.com/'
     //   '*'
     //   'https://example.com',
     //   'https://staging.example.com',
