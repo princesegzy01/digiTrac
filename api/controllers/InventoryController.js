@@ -57,6 +57,9 @@ module.exports = {
 	getAll : async function(req, res){
 		data = await Inventory.find({})
 		res.send(data)
+	},
+	populateDatasets:  async function(){
+		console.log("populator")
 	}
 
 }

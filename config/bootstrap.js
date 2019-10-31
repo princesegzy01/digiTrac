@@ -8,6 +8,7 @@
  * For more information on seeding your app with fake data, check out:
  * https://sailsjs.com/config/bootstrap
  */
+var cron = require('node-cron');
 
 module.exports.bootstrap = async function() {
 
@@ -26,5 +27,13 @@ module.exports.bootstrap = async function() {
   //   // etc.
   // ]);
   // ```
+
+  // console.log(" >>> started")
+  scanner = require("../api/utils/scannerController.js");
+
+  cron.schedule('*/10 * * * * *', () => {
+    scanner.start();
+    // console.log('running a task every minute');
+  });
 
 };
