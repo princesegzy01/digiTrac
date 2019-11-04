@@ -59,7 +59,7 @@
                         <tbody>
                             <tr v-for="product in inventory">
                                 <th scope="row">{{ product.id }}</th>
-                                <td>{{ getTagByTagNumber(product.tag) }}</td>
+                                <td>{{ getTagByTagNumber(product.epc) }}</td>
                                 <td>{{ product.serial }}</td>
                                 <td>{{ product.epc }}</td>
                                 <td> Default </td>

@@ -12,9 +12,10 @@
                         <thead class="thead-dark">
                             <tr>
                                 <th>#</th>
-                                <th>Tag Name</th>
+                                <th>Product Name</th>
+                                <th>Product Serial</th>
                                 <th>Tag Number</th>
-                                <th>Drug Name</th>
+                                
                                 <th>Action</th>
 
                                 <!-- <th>Date Created</th> -->
@@ -23,9 +24,10 @@
                         <tbody>
                             <tr v-for="tag in tags">
                                 <th scope="row">{{ tag.id }}</th>
-                                <td>{{ tag.tag_name }}</td>
-                                <td>{{ tag.tag_number }}</td>
                                 <td>{{ tag.product_name }}</td>
+                                <td>{{ tag.product_serial }}</td>
+                                <td>{{ tag.tag_number }}</td>
+                              
                                 <td>
                                     <button type="button" class="btn btn-primary waves-effect waves-light">Update</button>
                                     <button type="button" class="btn btn-success waves-effect waves-light">Delete</button>

@@ -1,3 +1,5 @@
+var _ = require('lodash');
+
 module.exports = {
 
 	add : async function(req, res){
@@ -58,8 +60,50 @@ module.exports = {
 		data = await Inventory.find({})
 		res.send(data)
 	},
-	populateDatasets:  async function(){
-		console.log("populator")
+	populateDatasets:  async function(JSONinventory){
+
+		if(JSONinventory.length == 0){
+			console.log(">> nothing to scan at the moment")
+			return
+		}
+
+		// retrieve only epc and timestamp
+		filteredData = _.map(JSONinventory, function(object) {
+			return _.pick(object, ['epc', 'ts']);
+		});
+
+		// order the data by timestamp ascending
+		orderdData = _.orderBy(filteredData, ['ts'],['asc']); 
+		
+
+		console.log(orderdData)
+		// Inventory.find({}).sort('ts DESC')
+		// .limit(1)
+		// .exec(async function(err, result){
+		
+		// 	// check if it return empty response
+		// 	// then add all the record
+		// 	if (result.length == 0){
+		// 		await Inventory.createEach(orderdData);
+		// 		console.log(">>>>>>>>>> Cron Services Successfully Added")
+
+		// 	}else{
+				
+		// 		// filter the inventory response and return only tags
+		// 		// scanned after the last imestamp stored in the databse
+		// 		var sortedData = _.filter(orderdData, function(tag) {	
+		// 			// return only tags with timestamp 
+		// 			// greater than the last in the database
+		// 			return Number(tag.ts) > Number(result[0].ts);
+		// 		});
+				
+		// 		await Inventory.createEach(sortedData);
+		// 		console.log(">>>>>>>>>>> Cron service Successfully Updated")
+		// 	}
+		// });
+	},
+	inventoryProcessor: async function(req, res){
+		res.send("cool")
 	}
 
 }

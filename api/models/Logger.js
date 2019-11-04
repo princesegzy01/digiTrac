@@ -1,9 +1,10 @@
 /**
- * Tags.js
+ * Logger.js
  *
  * @description :: A model definition represents a database table/collection.
  * @docs        :: https://sailsjs.com/docs/concepts/models-and-orm/models
  */
+
 
 module.exports = {
 
@@ -12,17 +13,17 @@ module.exports = {
 			type: 'number', 
 			autoIncrement: true
 		},
-		product_serial: {
+		epc : {
 			type: 'string',
 			required: true
 		},
-		tag_number: {
+		ts: {
 			type: 'string',
 			required: true
 		},
-		product_name: {
+		store: {
 			type: 'string',
-			required: true
+			defaultsTo: ''
 		},
 		createdAt: { 
 			type: 'number', 
@@ -34,4 +35,3 @@ module.exports = {
 		}
 	}
 };
-

@@ -8,10 +8,7 @@ const scannerObject = {
 
     start(){
         //connect to reader
-
-        InventoryController.populateDatasets();
-
-        
+       
         scanner.connectToReader(IP).then(async (res) => {
             // console.log(" >>>>>>>> ",  res)
 
@@ -26,7 +23,9 @@ const scannerObject = {
                 console.log(" Scanner Status : ", scannerStatus)
                 if (scannerStatus == "RUNNING"){
                     var JSONinventory = await scanner.getInventory(IP);
-                    console.log(" <<<< ", JSONinventory)
+                    
+                    // console.log(" <<<< ", JSONinventory)
+                    InventoryController.populateDatasets(JSONinventory);
                 }
 
                 if (scannerStatus == "STOPPED"){
@@ -36,7 +35,8 @@ const scannerObject = {
 
                     if (scannerStatus == "RUNNING"){
                         var JSONinventory = await scanner.getInventory(IP);
-                        console.log(" >>>> ", JSONinventory)
+                        // console.log(" >>>> ", JSONinventory)
+                        InventoryController.populateDatasets(JSONinventory);
                     }else{
                         console.log("Cannot start scanner ")
                     }

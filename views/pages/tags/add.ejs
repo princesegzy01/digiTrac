@@ -6,10 +6,17 @@
                     <h4 class="mb-3 header-title">Tag Setup</h4>
                     <span class="serverResponse" v-if="serverResponse"> {{ serverResponse }} </span>
                     <form @submit.prevent>
+
+						<div class="form-group">
+							<label for="exampleInputEmail1">Product Name</label>
+							<input type="text" v-model="tag.product_name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="product Name">
+							<small id="emailHelp" class="form-text text-muted">Name of Drug associated with the tag.</small>
+						</div>
+
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Tag Name</label>
-                            <input type="text" v-model="tag.tag_name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Tag name">
-                            <small id="emailHelp" class="form-text text-muted">This can be the tag manufacturer or comapny name.</small>
+                            <label for="exampleInputEmail1">Product Serial</label>
+                            <input type="text" v-model="tag.product_serial" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Product Serial">
+                            <small id="emailHelp" class="form-text text-muted">This is the serial numbeer of the drug.</small>
                         </div>
 
                         <div class="form-group">
@@ -18,11 +25,7 @@
                             <small id="emailHelp" class="form-text text-muted">This is the unique number attached to the tag.</small>
 						</div>
 						
-						<div class="form-group">
-                            <label for="exampleInputEmail1">Drug Name</label>
-                            <input type="text" v-model="tag.product_name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Drug Name">
-                            <small id="emailHelp" class="form-text text-muted">Name of Drug associated with the tag.</small>
-                        </div>
+						
 
                         <button type="submit" class="btn btn-primary waves-effect waves-light" v-on:click="addTag">Add tag</button>
                     </form>
@@ -41,7 +44,7 @@
 			message: 'Hello Vue.js!',
 			serverResponse : "",
 			tag : {
-				tag_name : "",
+				product_serial : "",
 				tag_number: "",
 				product_name: ""
 			}
@@ -59,8 +62,8 @@
 
 				this.serverResponse = "";
 
-				if(!this.tag.tag_name){
-					this.serverResponse = "Tag name is required to continue";
+				if(!this.tag.product_serial){
+					this.serverResponse = "Drug Serial is required to continue";
 					return;
 				}
 

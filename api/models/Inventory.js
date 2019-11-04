@@ -13,21 +13,25 @@ module.exports = {
 			type: 'number', 
 			autoIncrement: true
 		},
-		tag: {
-			type: 'string',
+		product: {
+			type: 'number',
 			required: true
 		},
-		serial: {
-			type: 'string',
+		previous_stock: {
+			type: 'number',
 			required: true
 		},
-		epc : {
+		current_stock: {
+			type: 'number',
+			required: true
+		},
+		status: {
 			type: 'string',
 			required: true
 		},
 		store: {
 			type: 'string',
-			required: true
+			defaultsTo: ''
 		},
 		createdAt: { 
 			type: 'number', 

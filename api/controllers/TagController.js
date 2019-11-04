@@ -21,9 +21,7 @@ module.exports = {
  
         // check if tag is used before
         Tags.find({
-            tag_name: data.tag_name,
             tag_number: data.tag_number,
-            tag_name: data.tag_name,
         }).exec(function (err, result) {
 		  
 		  if(result.length > 0) {

@@ -39,6 +39,10 @@ module.exports.routes = {
   'get /api/inventory': 'InventoryController.getAll',
 
 
+  // test logger
+  'get /api/testlogger': 'InventoryController.inventoryProcessor',
+
+
   
   // 'get /rfid/index': 'ProductController.add',
 
