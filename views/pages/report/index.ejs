@@ -15,7 +15,7 @@
                             <select v-model="filter.product" class="nice-select">
                                 <option> - Select Product - </option>
                                 <option value="all"> All </option>
-                                <option v-for="product in products" :value="product.tag_number">  {{ product.product_name}} </option>                               
+                                <option v-for="product in products" :value="product">  {{ product}} </option>                               
                             </select>
                         </div>
 
@@ -112,7 +112,25 @@
 
             //tags
             products  = await axios.get('/api/tags/')
-            this.products = products.data;
+            // console.log(products)
+           
+            product_names = []
+            products.data.forEach(function(item, index) {
+                product_names.push(item.product_name)
+            });
+
+        
+            result = new Set(product_names)
+            // console.log(result)
+
+
+            // this.products = products.data;
+
+            this.products = result;
+
+
+
+  
 
         },
         filters: {

@@ -4,7 +4,7 @@
  * @description :: Server-side actions for handling incoming requests.
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
-
+var _ = require('lodash');
 module.exports = {
   
     add : async function(req, res){
@@ -42,7 +42,8 @@ module.exports = {
 	},
 	getAll : async function(req, res){
 		data = await Tags.find({})
-		// console.log(data)
+    // console.log(" ><<<<<<<>>>>  ", data)
+    
 		res.send(data)
 	}
 };

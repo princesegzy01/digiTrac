@@ -38,26 +38,26 @@ module.exports = {
 
 		// product
 		if(req.body.product !== "all"  && req.body.product !==""){
-			resObj.tag = req.body.product
+			resObj.product = req.body.product
 		}
 		
-		// store
-		if(req.body.store !=="all"  && req.body.store !==""){
-			resObj.store =  req.body.store
-		}
+		// // store
+		// if(req.body.store !=="all"  && req.body.store !==""){
+		// 	resObj.store =  req.body.store
+		// }
 
 		// from
 		if(req.body.from !=="" && req.body.to !==""){
 			resObj.createdAt = { '>=' : req.body.from, '<=' : req.body.to}
 		}
 
-		// console.log(resObj)
-		result = await Inventory.find(resObj);
-		// console.log(result)
+		// // console.log(resObj)
+		result = await Inventory.find(resObj).sort('createdAt DESC');
 		res.status(200).send(result)
+
 	},
 	getAll : async function(req, res){
-		data = await Inventory.find({})
+		data = await Inventory.find({}).sort('createdAt DESC')
 		res.send(data)
 	},
 	populateDatasets:  async function(JSONinventory){
