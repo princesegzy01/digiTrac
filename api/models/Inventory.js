@@ -14,7 +14,7 @@ module.exports = {
 			autoIncrement: true
 		},
 		product: {
-			type: 'number',
+			type: 'string',
 			required: true
 		},
 		previous_stock: {
@@ -22,6 +22,10 @@ module.exports = {
 			required: true
 		},
 		current_stock: {
+			type: 'number',
+			required: true
+		},
+		difference: {
 			type: 'number',
 			required: true
 		},

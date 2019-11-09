@@ -49,9 +49,10 @@
                             <tr>
                                 <th>#</th>
                                 <th>Product</th>
-                                <th>Serial</th>
-                                <th>EPC</th>
-                                <th>Store</th>
+                                <th>Previous Stock</th>
+                                <th>Current Stock</th>
+                                <th>Difference</th>
+                                <th>Status</th>
                                 <th>Date</th>
                                 <th></th>
                             </tr>
@@ -59,10 +60,11 @@
                         <tbody>
                             <tr v-for="product in inventory">
                                 <th scope="row">{{ product.id }}</th>
-                                <td>{{ getTagByTagNumber(product.epc) }}</td>
-                                <td>{{ product.serial }}</td>
-                                <td>{{ product.epc }}</td>
-                                <td> Default </td>
+                                <td>{{ product.product }}</td>
+                                <td>{{ product.previous_stock }}</td>
+                                <td>{{ product.current_stock }}</td>
+                                <td>{{ product.difference }}</td>
+                                <td> {{ product.status }} </td>
                                 <td>{{ product.createdAt | timeStampConverter}}</td>
                                 <td>
                                     <button type="button" class="btn btn-primary waves-effect waves-light">View</button>

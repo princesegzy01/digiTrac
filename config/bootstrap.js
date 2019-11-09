@@ -31,9 +31,9 @@ module.exports.bootstrap = async function() {
   // console.log(" >>> started")
   scanner = require("../api/utils/scannerController.js");
 
-  // cron.schedule('*/10 * * * * *', () => {
-    // scanner.start();
-    // console.log('running a task every minute');
-  // });
+  cron.schedule('*/10 * * * * *', () => {
+    scanner.start();
+    console.log('running a task every minute');
+  });
 
 };
