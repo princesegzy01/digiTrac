@@ -84,10 +84,9 @@
                 if(this.username == "admin" && this.password == "password"){
                     alert("access granted");
                     window.location = "/app/report";
-                }
-
-                this.serverResponse = "Invalid email or password";                               
-                
+                }else{
+                    this.serverResponse = "Invalid email or password";   
+                }                           
 			}
 		}
 	})

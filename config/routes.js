@@ -27,6 +27,7 @@ module.exports.routes = {
   'get /app/tags/': { view: 'pages/tags/index' },
   'get /app/report/': { view: 'pages/report/index' },
   'get /app/report/details': { view: 'pages/report/detail' },
+  'get /app/store': { view: 'pages/store/index' },
   
   'post /api/logger/add': 'LoggerController.postLog',
   'get /api/logger/': 'LoggerController.getLog',

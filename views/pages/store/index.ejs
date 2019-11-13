@@ -1,0 +1,184 @@
+<meta http-equiv="refresh" content="5">  
+<div class="" id="app2">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card-box">
+                <h4 class="header-title">Inventory Report</h4>
+                <p class="sub-header">
+                    This will show the detailed report of the vaccine selected
+                </p>
+
+
+                <!-- <div class="col-lg-8"></div> -->
+                    <div class="row" style="display: none">
+                        <div class="col-lg-2">
+                            <span>Product</span> </br> 
+                            <select v-model="filter.product" class="nice-select">
+                                <option> - Select Product - </option>
+                                <option value="all"> All </option>
+                                <option v-for="product in products" :value="product">  {{ product}} </option>                               
+                            </select>
+                        </div>
+
+                        <div class="col-lg-2">
+                            <span>Store</span> </br> 
+                            <select  v-model="filter.store"  class="nice-select">
+                                <option> - Select Store - </option>
+                                <option value="all"> Default </option>
+                            </select>
+                        </div>
+
+                        <div class="col-lg-2">
+                            <span>Duration From</span> </br> 
+                            <vuejs-datepicker  v-model="filter.from" ></vuejs-datepicker>
+                        </div>
+
+                        <div class="col-lg-2">
+                            <span>Duration To</span> </br> 
+                            <vuejs-datepicker  v-model="filter.to" ></vuejs-datepicker>
+                        </div>
+
+                        <div class="col-lg-2">
+                            <button type="button" class="btn btn-lg btn-success waves-effect waves-light" v-on:click="filterData" >Filter</button>
+                        </div>
+                    </div>
+                </div>
+                <p></p>
+                <div class="table-responsive">
+                    <table class="table mb-0">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>#</th>
+                                <th>Product</th>
+                                <th>Previous Stock</th>
+                                <th>Current Stock</th>
+                                <th>Difference</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="product in inventory">
+                                <th scope="row">{{ product.id }}</th>
+                                <td>{{ product.product }}</td>
+                                <td>{{ product.previous_stock }}</td>
+                                <td>{{ product.current_stock }}</td>
+                                <td>{{ product.difference }}</td>
+                                <td> {{ product.status }} </td>
+                                <td>{{ product.createdAt | timeStampConverter}}</td>
+                                <td>
+                                    <!-- <button type="button" class="btn btn-primary waves-effect waves-light">View</button> -->
+                                    <!-- <button type="button" class="btn btn-success waves-effect waves-light">Delete</button> -->
+                                </td>
+                                <!-- <td>{{ tag.createdAt }}</td> -->
+                            </tr>
+                        
+                        </tbody>
+                    </table>
+                </div> <!-- end table-responsive-->
+
+            </div> <!-- end card-box -->
+        </div> <!-- end col -->
+    </div>
+</div>
+
+<script src="/js/vue/vue-router.js"></script>
+<script>
+    // import VueRouter from 'vue-router'
+    var app = new Vue({
+        el: '#app2',
+        // router,
+        data: {
+            inventory:[],
+            products: [],
+            store: [],
+            filter : {
+                product : "all",
+                store: "",
+                from: "",
+                to:""            }
+        },
+        components: {
+            vuejsDatepicker
+        },
+        async asyncData ({}) {
+            // let allTags  = await axios.get('/api/tags/')
+            // console.log("allTags")
+            // return { tags: allTags }
+        },
+        mounted: async function(){
+
+            // console.log(" >>>  ", this.$route.query)
+            let params = new URL(window.location).searchParams;
+            master_product = params.get("product")
+
+            inventory  = await axios.get('/api/inventory/details/?product='+master_product)
+            this.inventory = inventory.data;
+            console.log(inventory.data)
+            //tags
+            products  = await axios.get('/api/tags/')
+            // console.log(products)
+           
+            product_names = []
+            products.data.forEach(function(item, index) {
+                product_names.push(item.product_name)
+            });
+
+        
+            result = new Set(product_names)
+            // console.log(result)
+
+
+            // this.products = products.data;
+
+            this.products = result;
+
+
+
+  
+
+        },
+        filters: {
+            // convert timestamp to UTC format
+            timeStampConverter:  function (text) {
+                const utc = moment.utc(new Date(text));
+                return moment(utc).format("MMM-DD-YYYY hh:mm:ss A + UTC");
+            }
+        },
+        methods: {
+            reverseMessage:  async function () {
+                this.message = this.message.split('').reverse().join('')
+            },
+            getTagByTagNumber(tag){
+                var res = _.find(this.products, function(o) { return o.tag_number == tag; });
+                if(!res) return tag
+                return res.product_name
+            },
+            filterData: async function(){
+               
+                if(this.filter.from !== ""){
+                    this.filter.from = moment(this.filter.from).unix() * 1000;
+                }
+
+                if(this.filter.to !== ""){
+                    this.filter.to = moment(this.filter.to).unix() * 1000;
+                }
+                
+                if(this.filter.from > this.filter.to){
+                    alert('Duration to must be greater than from')
+                    return;
+                }
+
+                // pull inventory record
+                res = await axios.post('/api/inventory/filter', this.filter)
+                
+                //update inventory record
+                this.inventory = res.data
+                
+            }
+        
+        }
+    })
+
+</script>
