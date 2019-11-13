@@ -1,3 +1,4 @@
+<meta http-equiv="refresh" content="5">  
 <div class="" id="app2">
     <div class="row">
         <div class="col-lg-12">
@@ -49,10 +50,10 @@
                             <tr>
                                 <th>#</th>
                                 <th>Product</th>
-                                <th>Previous Stock</th>
-                                <th>Current Stock</th>
-                                <th>Difference</th>
-                                <th>Status</th>
+                                <th>Stock count</th>
+                                <!-- <th>Current Stock</th> -->
+                                <!-- <th>Difference</th> -->
+                                <!-- <th>Status</th> -->
                                 <th>Date</th>
                                 <th></th>
                             </tr>
@@ -61,13 +62,14 @@
                             <tr v-for="product in inventory">
                                 <th scope="row">{{ product.id }}</th>
                                 <td>{{ product.product }}</td>
-                                <td>{{ product.previous_stock }}</td>
+                                <!-- <td>{{ product.previous_stock }}</td> -->
                                 <td>{{ product.current_stock }}</td>
-                                <td>{{ product.difference }}</td>
-                                <td> {{ product.status }} </td>
+                                <!-- <td>{{ product.difference }}</td> -->
+                                <!-- <td> {{ product.status }} </td> -->
                                 <td>{{ product.createdAt | timeStampConverter}}</td>
                                 <td>
-                                    <button type="button" class="btn btn-primary waves-effect waves-light">View</button>
+                                    <!-- <button type="button" class="btn btn-primary waves-effect waves-light">View</button> -->
+                                    <a :href="'/app/report/details/?product='+product.product" class="btn btn-primary waves-effect waves-light">View</a>
                                     <!-- <button type="button" class="btn btn-success waves-effect waves-light">Delete</button> -->
                                 </td>
                                 <!-- <td>{{ tag.createdAt }}</td> -->
@@ -108,8 +110,16 @@
 
             // inventory
             inventory  = await axios.get('/api/inventory/')
-            this.inventory = inventory.data;
+                       
+            inventory_data = []
+            inventory.data.forEach(function(item, index) {
+                var res = _.find(inventory_data, function(o) { return o.product == item.product; });
+                if(!res) inventory_data.push(item)
+            });
 
+            this.inventory = inventory_data;
+
+        
             //tags
             products  = await axios.get('/api/tags/')
             // console.log(products)

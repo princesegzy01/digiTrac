@@ -29,7 +29,7 @@ module.exports.bootstrap = async function() {
   // ```
 
   // console.log(" >>> started")
-  scanner = require("../api/utils/scannerController.js");
+  // scanner = require("../api/utils/scannerController.js");
 
   // cron.schedule('*/10 * * * * *', () => {
   //   scanner.start();

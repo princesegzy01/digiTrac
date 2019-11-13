@@ -60,6 +60,11 @@ module.exports = {
 		data = await Inventory.find({}).sort('createdAt DESC')
 		res.send(data)
 	},
+	getDetail : async function(req, res){
+		data = await Inventory.find({ product : req.query.product}).sort('createdAt DESC')
+		console.log(data)
+		res.send(data)
+	},
 	populateDatasets:  async function(JSONinventory){
 
 		if(JSONinventory.length == 0){
@@ -77,6 +82,8 @@ module.exports = {
 		
 
 		console.log(orderdData)
+
+		this.inventoryProcessor(orderdData)
 		// Inventory.find({}).sort('ts DESC')
 		// .limit(1)
 		// .exec(async function(err, result){
@@ -102,7 +109,7 @@ module.exports = {
 		// 	}
 		// });
 	},
-	inventoryProcessor: async function(req, res){
+	inventoryProcessor: async function(data){
 		// data = [
 		// 	{
 		// 		epc : "4567",
@@ -126,32 +133,32 @@ module.exports = {
 		// 	},
 		// ];
 
-		data = [
-			{
-				epc : "4567",
-				ts : 1
-			},
-			// {
-			// 	epc : "555525",
-			// 	ts : 1
-			// },
-			{
-				epc : "255654",
-				ts : 1
-			},
-			{
-				epc : "588",
-				ts : 1
-			},
-			{
-				epc : "54646464",
-				ts : 1
-			},
-			{
-				epc : "846543256",
-				ts : 1
-			},
-		];
+		// data = [
+		// 	{
+		// 		epc : "4567",
+		// 		ts : 1
+		// 	},
+		// 	// {
+		// 	// 	epc : "555525",
+		// 	// 	ts : 1
+		// 	// },
+		// 	{
+		// 		epc : "255654",
+		// 		ts : 1
+		// 	},
+		// 	{
+		// 		epc : "588",
+		// 		ts : 1
+		// 	},
+		// 	{
+		// 		epc : "54646464",
+		// 		ts : 1
+		// 	},
+		// 	{
+		// 		epc : "846543256",
+		// 		ts : 1
+		// 	},
+		// ];
 
 	
 		// return all tags in datbase
@@ -194,6 +201,8 @@ module.exports = {
 	
 		inventoryCount = await Inventory.count();
 
+
+		console.log(">>>>  Valid Epc : ", product_name_epc.length, "  >>  Invalid Epc : ", invalid_epc.length )
 
 		// check if inventory count is empty
 		// add all the scaned prodcut with the count 
@@ -279,7 +288,8 @@ module.exports = {
 		}	
 
 		console.log(inventoryCount)
-		res.send("cool")
+		// res.send("cool")
+		console.log("cool")
 
 	},
 

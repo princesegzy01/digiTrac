@@ -26,6 +26,7 @@ module.exports.routes = {
   'get /app/tags/add': { view: 'pages/tags/add' },
   'get /app/tags/': { view: 'pages/tags/index' },
   'get /app/report/': { view: 'pages/report/index' },
+  'get /app/report/details': { view: 'pages/report/detail' },
   
   'post /api/logger/add': 'LoggerController.postLog',
   'get /api/logger/': 'LoggerController.getLog',
@@ -37,6 +38,9 @@ module.exports.routes = {
   'post /api/inventory/filter': 'InventoryController.getFiltered',
 
   'get /api/inventory': 'InventoryController.getAll',
+  'get /api/inventory/details': 'InventoryController.getDetail',
+
+  
 
 
   // test logger
