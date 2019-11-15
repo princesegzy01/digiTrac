@@ -47,21 +47,6 @@ module.exports.routes = {
   // test logger
   'get /api/testlogger': 'InventoryController.inventoryProcessor',
 
-
-  
-  // 'get /rfid/index': 'ProductController.add',
-
-  //scan product from RFID
-  // 'post /scan/add' : '',
-
-  //map tag to a product
-  // 'post /tag/add' : '',
-
-
-  // Get product betweent date
-  // 'get /report/' : '',
-
-
   //store
   'post /store/add': 'StoreController.add',
 
