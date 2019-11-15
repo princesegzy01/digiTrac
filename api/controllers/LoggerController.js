@@ -3,9 +3,6 @@ module.exports = {
 
 	postLog : async function(req, res){
 
-
-       
-
         // delete existing log
         try {
             fs.unlinkSync("logger.json")

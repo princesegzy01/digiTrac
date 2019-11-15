@@ -8,15 +8,7 @@ var _ = require('lodash');
 module.exports = {
   
     add : async function(req, res){
-
-        // console.log(req.body)
-
-        // console.log(await sails.models.Product));
-
-        // if(!){
-        //     return res.status(400).json({})
-        // }
-
+      
         const data = req.body;
  
         // check if tag is used before
@@ -37,8 +29,6 @@ module.exports = {
           })
 
         });
-        // console.log(await Product.find({}));
-        // return res.send("hello")
 	},
 	getAll : async function(req, res){
 		data = await Tags.find({})
