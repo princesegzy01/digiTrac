@@ -20,9 +20,11 @@ Vue.js is an open-source Model–view–viewmodel JavaScript framework for build
 
 4. change directory into the digiTrac folder and run `npm install` to install all the dependencies.
 
-5. Start the application by running `sails lift`.
+### Run App
 
-6. open your favourrite browser and point the url to `http://localhost:1337` to see the application running.
+1. Start the application by running `sails lift`.
+
+2. open your favourrite browser and point the url to `http://localhost:1337` to see the application running.
 
 
 
