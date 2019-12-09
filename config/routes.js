@@ -22,7 +22,8 @@ module.exports.routes = {
   //All views
 
   '/': { view: 'pages/index',  locals: { layout: 'layouts/account' } },
-  '/app/dashboard': { view: 'pages/store/index' },
+  // '/app/dashboard': { view: 'pages/store/index' },
+  'get /app/dashboard': { view: 'pages/dashboard' },
   'get /app/tags/add': { view: 'pages/tags/add' },
   'get /app/tags/': { view: 'pages/tags/index' },
   'get /app/report/': { view: 'pages/report/index' },
