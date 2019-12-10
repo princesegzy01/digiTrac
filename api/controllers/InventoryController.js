@@ -168,7 +168,7 @@ module.exports = {
 						newStock.product = product.product
 						newStock.previous_stock = inventoryFinder.current_stock
 						newStock.current_stock = product.count
-						newStock.difference = inventoryFinder.current_stock - product.count
+						newStock.difference = Math.abs(inventoryFinder.current_stock - product.count)
 						newStock.status = inventoryFinder.current_stock > product.count ? 'subtraction' : 'addition';
 
 						newProduct.push(newStock)
