@@ -13,7 +13,7 @@
     "sails": "^1.2.3",
     "sails-hook-grunt": "^4.0.0",
     "sails-hook-orm": "^2.1.1",
-    "sails-hook-sockets": "^2.0.0",
+    "sails-hook-sockets": "^2.0.3",
     "xml-to-json-promise": "0.0.3",
     "xml2json": "^0.11.2",
     "xmlhttprequest": "^1.8.0"
